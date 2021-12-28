@@ -1,0 +1,168 @@
+@font-face 
+{
+  font-family: 'Source Sans Pro';
+  src: url("Fonts/SourceSansPro-ExtraLight.eot");
+  src: url("Fonts/SourceSansPro-ExtraLight.eot?#iefix") format("embedded-opentype"),
+       url("Fonts/SourceSansPro-ExtraLight.woff2") format("woff2"), 
+       url("Fonts/SourceSansPro-ExtraLight.woff") format("woff"), 
+       url("Fonts/SourceSansPro-ExtraLight.ttf") format("truetype"), 
+       url("Fonts/SourceSansPro-ExtraLight.svg#SourceSansPro-ExtraLight") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body 
+{
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  background-color: #F5F5F5;
+  text-align: center;
+  color: grey;
+  font-size: 1.2em;
+  width: auto;
+}
+
+.blocFields
+{
+  text-align: left;
+  margin: auto;
+  width: 30%;
+  
+}
+
+#inputPassword, #inputFirstName, #inputLastName, #inputEmail 
+{
+    width: 100%;
+    height: 28px;
+    font-size: 1em;
+    font-family: 'Source Sans Pro', arial, sans-serif;
+    color: grey;
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+#loginButton, #registerButton, #updateButton
+{
+  background: linear-gradient(0deg, #46871f 0%, #6dc731 100%);
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  width: 140px;
+  color: white;
+  text-align: center;
+  transform: scale(1);
+  transition: transform 400ms;
+}
+
+#createAccountLogin, #blocRegister, #registerButton, #footerLogin
+{
+  display: none;
+}
+
+#footer
+{
+  font-size: 0.8em;
+}
+
+
+#blocDetails
+{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+text-align: left;
+}
+
+#blocContactDetails
+{
+  width: 40%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#blocContractDetails
+{
+  width: 30%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#blocProductDetails
+{
+  width:30%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.productItem
+{
+  background: rgba(177,227,145,1);
+  border: none;
+  border-radius: 5px;
+  color: grey;
+  margin-top: 5px;
+  padding-left: 3px;
+
+}
+
+#salesFirstName, #salesLastName, #salesEmail, #salesPhoneNumber, #salesStreet, #salesCity, #salesCountry
+{
+  font-size: 1em;
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  border: none;
+  border-width:0px;
+  background-color: #F5F5F5;
+  color: grey;
+  padding-left: 10px;
+  margin-left: 5px;
+}
+
+#salesStreet
+{
+  width: 350px;
+}
+
+
+#informationsPage, #salesSalesforceId
+{
+  display:none;
+}
+
+#updateMessage
+{
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  color: green;
+}
+
+.productNameItem
+{
+  font-weight: bold;
+}
+
+#errorMessage
+{
+  color: red;
+  font-family: 'Source Sans Pro', arial, sans-serif;
+}
+
+@media all and (max-width: 768px)
+{
+
+  .blocFields
+  {
+   
+    width: 90%;
+    margin: 5px auto;
+  }
+
+ #blocDetails
+  {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  }
+
+  #blocContactDetails, #blocContractDetails, #blocProductDetails
+  {
+    width: 90%;
+    margin: 5px auto;
+  }
+ 
+}

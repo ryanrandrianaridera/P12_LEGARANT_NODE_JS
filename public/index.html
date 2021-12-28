@@ -1,0 +1,79 @@
+<html lang="en">
+	<head>
+		<title>Legarant Mobile App</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="#">
+		<link rel="stylesheet" type="text/css" href="style.css">
+  	</head>
+  	<body>
+		<img src="Img/LegarantLogo.gif" alt="logo Legarant" id="logo"/>
+		<div id="welcomePage">
+			<h1 class="title">Welcome to Legarant Mobile App !</h1><br/>
+			<h3 id="loginTitle">Login</h3><h3 id="createAccountLogin">Create your account</h3>
+			<div class=fieldsForm>
+				<div id="blocRegister">
+					<div class= "blocFields">
+						<label class="label" >First Name</label><br/>
+						<input id="inputFirstName" type="textarea" required>
+					</div>
+					<div class= "blocFields">
+						<label class="label" >Last Name</label><br/>
+						<input id="inputLastName" type="textarea" required>
+					</div>
+				</div>
+				<div id="blocLogin">
+					<div class= "blocFields">
+						<label class="label">Email</label><br/>
+						<input id="inputEmail" type="email" required><br/>
+					</div>
+					<div class= "blocFields">
+						<label="label">Password</label><br/>
+						<input id="inputPassword" type="password" required> <br/>
+					</div>
+				</div>
+				<div>
+					<p id="errorMessage"></p>
+				</div>
+			 <button id="loginButton">Login</button>
+			 <button id="registerButton">Register</button>
+			</div>
+			<div id= "footer">
+				<p id="footerRegister">Don't have an account yet ? <a id="signInLink" href="#">Sign-in</a></p>
+				<p id="footerLogin">Have already an account ? <a id="loginLink" href="#">Login</a></p>
+			</div>
+		</div>
+		<div id="informationsPage">
+			<div id ="headerPersonalSpace">
+				<h2 id="welcomePersonalSpace">Welcome to your personal space</h2>
+				<hr>
+			</div>
+			<div id="blocDetails">
+				<div id ="blocContactDetails">
+					<h2 class="subtitles">My Personal Informations</h2>
+					<p id="contactFirstName">FistName:<input id="salesFirstName" type="textarea"></p>
+					<p id="contactLastName">LastName:<input id="salesLastName"type="textarea"></p>
+					<p id= "contactEmail">Email:<input id="salesEmail"type="email"></p>
+					<p id="contactPhone">Phone Number:<input id="salesPhoneNumber"type="textarea"></p>
+					<h3 class="adressSection">My Address</h3>
+					<p id = "contactadress">Address:<input id="salesStreet" type "textarea"></p>
+					<p id="contactCity">City:<input id="salesCity"type="textarea"></p>
+					<p><input id="salesSalesforceId" type="textarea"></p>
+					<p id = "contactCountry">Country:<input id="salesCountry"type="textarea"></p>
+					<button id="updateButton">Update my Data</button><p id="updateMessage"></p>
+				</div>
+				<div id ="blocContractDetails">
+					<h2 class="subtitles">My Contract</h2>
+					<p id="contactContractNumber"></p>
+					<p id="contactContractStartDate"></p>
+					<p id="contactContractEndDate"></p>
+					<p id="contactContractTerm"></p>
+				</div>
+				<div id ="blocProductDetails">
+					<h2 class="subtitles">Our products</h2>
+				</div>
+			</div>
+		</div>
+		<script src="client.js"></script>
+  	</body>
+</html>

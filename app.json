@@ -1,0 +1,8 @@
+{
+    "name": "P12_LEGARANT_NODE_JS",
+    "description": "This application is a mobile web app for Legarant Company.",
+    "repository": "",
+    "success_url": "/index.html",  
+    "addons": ["heroku-postgresql", "herokuconnect"]
+    
+  }
