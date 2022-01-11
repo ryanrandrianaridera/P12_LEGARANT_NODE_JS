@@ -5,6 +5,7 @@ var emailInput = document.getElementById("inputEmail");
 var passwordInput = document.getElementById("inputPassword");
 const registerButton = document.getElementById("registerButton");
 const loginButton = document.getElementById("loginButton");
+//const cancelButton = document.getElementById("cancelButton");
 var firstNameInput = document.getElementById("inputFirstName");
 var lastNameInput = document.getElementById("inputLastName");
 var footerLogin = document.getElementById("footerLogin");
@@ -19,6 +20,7 @@ const updateButton = document.getElementById("updateButton");
 var blocProductDetails = document.getElementById("blocProductDetails");
 var welcomePage = document.getElementById("welcomePage");
 var informationsPage = document.getElementById("informationsPage");
+var contactSalutation = document.getElementById("salesSalutation");
 var contactFirstName = document.getElementById("salesFirstName");
 var contactLastName = document.getElementById("salesLastName");
 var contactEmail = document.getElementById("salesEmail");
@@ -46,6 +48,7 @@ function displayRegisterPage() {
   loginTitle.style.display = "none";
   footerRegister.style.display = "none";
   loginButton.style.display = "none";
+  //cancelButton.style.display = "none";
 }
 // display login page
 function displayLoginPage() {
@@ -57,6 +60,8 @@ function displayLoginPage() {
   footerRegister.style.display = "block";
   loginButton.style.display = "block";
   loginButton.style.margin = "auto";
+  //cancelButton.style.display = "block";
+  //cancelButton.style.margin = "auto";
 }
 
 /*-----------------------------------------------------------------------*/
@@ -74,6 +79,7 @@ loginButton.addEventListener("click", function (e) {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 && xhr.responseText != "") {
         var response = JSON.parse(xhr.response);
+        //console.log(response);
 
         // Call function to display contact details
         displayContactDetails(response);
@@ -92,7 +98,7 @@ loginButton.addEventListener("click", function (e) {
       }
     }
   };
-  xhr.open("POST", "/api/getContact", true);
+  xhr.open("POST", "/api/contact/login", true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(
     JSON.stringify({
@@ -101,6 +107,14 @@ loginButton.addEventListener("click", function (e) {
     })
   );
 });
+
+// Cancel Button
+/*
+cancelButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  location.reload();
+});
+*/
 
 // Register a new contact
 registerButton.addEventListener("click", function (e) {
@@ -111,7 +125,7 @@ registerButton.addEventListener("click", function (e) {
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
-      if (xhr.status == 200 && xhr.responseText != "") {
+      if (xhr.status == 201 && xhr.responseText != "") {
         var response = JSON.parse(xhr.response);
 
         alert("Your Account has been registered with success !");
@@ -135,15 +149,15 @@ registerButton.addEventListener("click", function (e) {
       }
     }
   };
-  xhr.open("POST", "/api/register", true);
+  xhr.open("POST", "/api/contact/register", true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(
     JSON.stringify({
-      password: passwordInput.value,
-      // salutation : salutationInput.value,
-      firstName: firstNameInput.value,
-      lastName: lastNameInput.value,
-      email: emailInput.value,
+      salutation: inputSalutation.value,
+      firstname: inputFirstName.value,
+      lastname: inputLastName.value,
+      email: inputEmail.value,
+      password: inputPassword.value,
     })
   );
 });
@@ -168,18 +182,18 @@ updateButton.addEventListener("click", function (e) {
       }
     }
   };
-  xhr.open("POST", "/api/update", true);
+  xhr.open("PATCH", "/api/contact/update", true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(
     JSON.stringify({
-      //salutation: contactSalutation.value,
-      firstName: contactFirstName.value,
-      lastName: contactLastName.value,
+      salutation: contactSalutation.value,
+      firstname: contactFirstName.value,
+      lastname: contactLastName.value,
       email: contactEmail.value,
       phone: contactPhone.value,
-      mailingStreet: contactStreet.value,
-      mailingCity: contactCity.value,
-      mailingCountry: contactCountry.value,
+      mailingstreet: contactStreet.value,
+      mailingcity: contactCity.value,
+      mailingcountry: contactCountry.value,
       sfid: contactSalesforceId.value,
     })
   );
@@ -198,7 +212,7 @@ function displayContactInformations(firstName) {
 }
 
 function displayContactDetails(contact) {
-  //contactSalutation.value = contact.salutation;
+  contactSalutation.value = contact.salutation;
   contactFirstName.value = contact.firstname;
   contactLastName.value = contact.lastname;
   contactEmail.value = contact.email;
@@ -232,7 +246,7 @@ function displayContractDetails(salesforceId) {
       }
     }
   };
-  xhr.open("POST", "/api/getContract", true);
+  xhr.open("POST", "/api/contract/getContract", true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(
     JSON.stringify({
@@ -256,7 +270,7 @@ function displayLegarantProduct() {
       }
     }
   };
-  xhr.open("POST", "/api/getProducts", true);
+  xhr.open("POST", "/api/product/getProduct", true);
   xhr.send();
 }
 

@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../fonts/sourcesanspro/SourceSansPro-ExtraLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Source Sans Pro", arial, sans-serif;
+  background-color: #f5f5f5;
+  text-align: center;
+  color: black;
+  font-size: 1.2em;
+  width: auto;
+}
+
+.blocFields {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+}
+
+#inputPassword,
+#inputFirstName,
+#inputLastName,
+#inputEmail {
+  width: 100%;
+  height: 30px;
+  font-size: 1em;
+  font-family: "Source Sans Pro", arial, sans-serif;
+  color: rgb(7, 7, 7);
+  margin-top: 3px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 4.5px 7.5px;
+  border: 0.1125rem solid #1d9a8d;
+  height: 35px;
+  width: 140px;
+  max-width: 125px;
+  color: #fff;
+  background: #1d9a8d;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bolder;
+  letter-spacing: auto;
+  display: inline-block;
+  vertical-align: top;
+  align-content: center;
+  cursor: pointer;
+  border-radius: 10rem;
+  transition: transform 300ms;
+}
+/*
+#loginButton,
+#registerButton,
+#updateButton {
+  background: #08b834;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  width: 140px;
+  color: white;
+  text-align: center;
+  transform: scale(1);
+  transition: transform 400ms;
+}
+
+#cancelButton,
+#deconnectButton {
+  background: #b82208;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  width: 140px;
+  color: white;
+  text-align: center;
+  transform: scale(1);
+  transition: transform 400ms;
+}
+*/
+
+#createAccountLogin,
+#blocRegister,
+#registerButton,
+#footerLogin {
+  display: none;
+}
+
+#footer {
+  font-size: 0.8em;
+}
+
+#blocDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
+}
+
+#blocContactDetails {
+  width: 40%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#blocContractDetails {
+  width: 30%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#blocProductDetails {
+  width: 30%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.productItem {
+  background: rgb(141, 238, 138);
+  border: none;
+  border-radius: 5px;
+  color: rgb(10, 10, 10);
+  margin-top: 5px;
+  padding-left: 3px;
+}
+
+#salesSalutation,
+#salesFirstName,
+#salesLastName,
+#salesEmail,
+#salesPhoneNumber,
+#salesStreet,
+#salesCity,
+#salesCountry {
+  font-size: 1em;
+  font-family: "Source Sans Pro", arial, sans-serif;
+  border: none;
+  border-width: 0px;
+  background-color: #f5f5f5;
+  color: rgb(14, 13, 13);
+  padding-left: 10px;
+  margin-left: 5px;
+}
+
+#salesStreet {
+  width: auto;
+}
+
+#informationsPage,
+#salesSalesforceId {
+  display: none;
+}
+
+#updateMessage {
+  font-family: "Source Sans Pro", arial, sans-serif;
+  color: green;
+}
+
+.productNameItem {
+  font-weight: bold;
+}
+
+#errorMessage {
+  color: red;
+  font-family: "Source Sans Pro", arial, sans-serif;
+}
+
+@media all and (max-width: 768px) {
+  .blocFields {
+    width: 90%;
+    margin: 5px auto;
+  }
+
+  #blocDetails {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  #blocContactDetails,
+  #blocContractDetails,
+  #blocProductDetails {
+    width: 90%;
+    margin: 5px auto;
+  }
+}
