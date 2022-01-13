@@ -39,6 +39,8 @@ client
   .then(() => console.log("Heroku db connected"))
   .catch((err) => console.error("connection error", err.stack));
 
+const signRoutes = require("./api/sign");
+app.use("/api/sign", signRoutes);
 const contactRoutes = require("./api/contact");
 app.use("/api/contact", contactRoutes);
 const contractRoutes = require("./api/contract");

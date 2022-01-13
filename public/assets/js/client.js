@@ -3,9 +3,9 @@ console.log("Client-side code running");
 // Variables declaration
 var emailInput = document.getElementById("inputEmail");
 var passwordInput = document.getElementById("inputPassword");
-const registerButton = document.getElementById("registerButton");
-const loginButton = document.getElementById("loginButton");
-//const cancelButton = document.getElementById("cancelButton");
+var registerButton = document.getElementById("registerButton");
+var loginButton = document.getElementById("loginButton");
+var deconnectButton = document.getElementById("deconnectButton");
 var firstNameInput = document.getElementById("inputFirstName");
 var lastNameInput = document.getElementById("inputLastName");
 var footerLogin = document.getElementById("footerLogin");
@@ -16,7 +16,7 @@ var loginLink = document.getElementById("loginLink");
 var registerLink = document.getElementById("signInLink");
 var blocRegister = document.getElementById("blocRegister");
 var blocLogin = document.getElementById("blocLogin");
-const updateButton = document.getElementById("updateButton");
+var updateButton = document.getElementById("updateButton");
 var blocProductDetails = document.getElementById("blocProductDetails");
 var welcomePage = document.getElementById("welcomePage");
 var informationsPage = document.getElementById("informationsPage");
@@ -60,8 +60,6 @@ function displayLoginPage() {
   footerRegister.style.display = "block";
   loginButton.style.display = "block";
   loginButton.style.margin = "auto";
-  //cancelButton.style.display = "block";
-  //cancelButton.style.margin = "auto";
 }
 
 /*-----------------------------------------------------------------------*/
@@ -71,95 +69,99 @@ function displayLoginPage() {
 // Log a contact already registered
 loginButton.addEventListener("click", function (e) {
   e.preventDefault();
+  if (emailInput.value == "" || passwordInput.value == "") {
+    alert("Email and Password are required! ");
+  } else {
+    //Create our request
+    var xhr = new XMLHttpRequest();
 
-  //Create our request
-  var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200 && xhr.responseText != "") {
+          var response = JSON.parse(xhr.response);
+          //console.log(response);
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 200 && xhr.responseText != "") {
-        var response = JSON.parse(xhr.response);
-        //console.log(response);
+          // Call function to display contact details
+          displayContactDetails(response);
 
-        // Call function to display contact details
-        displayContactDetails(response);
+          // Call function to display contract details
+          displayContractDetails(response.sfid);
 
-        // Call function to display contract details
-        displayContractDetails(response.sfid);
+          // Call function to display Legarant products
+          displayLegarantProduct();
 
-        // Call function to display Legarant products
-        displayLegarantProduct();
-
-        // display contact informations
-        displayContactInformations(response.firstname);
-      } else {
-        document.getElementById("errorMessage").innerHTML =
-          "Sorry but we couldn't find your account with those informations.";
+          // display contact informations
+          displayContactInformations(response.firstname);
+        } else {
+          /*
+          document.getElementById("errorMessage").innerHTML =
+            "Sorry but we couldn't find your account, please verify email or password.";
+          */
+          alert(
+            "Sorry but we couldn't find your account, please verify email or password."
+          );
+        }
       }
-    }
-  };
-  xhr.open("POST", "/api/contact/login", true);
-  xhr.setRequestHeader("Content-type", "application/json");
-  xhr.send(
-    JSON.stringify({
-      password: passwordInput.value,
-      email: emailInput.value,
-    })
-  );
+    };
+    xhr.open("POST", "/api/sign/login", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(
+      JSON.stringify({
+        password: passwordInput.value,
+        email: emailInput.value,
+      })
+    );
+  }
 });
 
-// Cancel Button
-/*
-cancelButton.addEventListener("click", function (e) {
+// Deconnect Button
+
+deconnectButton.addEventListener("click", function (e) {
   e.preventDefault();
   location.reload();
 });
-*/
 
 // Register a new contact
 registerButton.addEventListener("click", function (e) {
   e.preventDefault();
-
-  //Create our request
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 201 && xhr.responseText != "") {
-        var response = JSON.parse(xhr.response);
-
-        alert("Your Account has been registered with success !");
-
-        // Call function to display contact details
-        displayContactDetails(response);
-
-        // Call function to display contract details
-        displayContractDetails(response.sfid);
-
-        // Call function to display Legarant products
-        displayLegarantProduct();
-
-        // display contact informations
-        displayContactInformations(response.firstname);
-      } else {
-        //document.getElementById("errorMessage").innerHTML =
-        alert(
-          "Sorry but we couldn't find your account with these informations."
-        );
+  if (
+    inputFirstName.value == "" ||
+    inputLastName.value == "" ||
+    inputEmail.value == "" ||
+    inputPassword.value == ""
+  ) {
+    alert("FirstName & LastName & Email & Password are required ");
+  } else {
+    //Create our request
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 201 && xhr.responseText != "") {
+          var response = JSON.parse(xhr.response);
+          alert(
+            "Your Account has been registered with success ! Please Log In"
+          );
+          location.reload();
+        } else {
+          //document.getElementById("errorMessage").innerHTML =
+          alert(
+            "Sorry but we couldn't find your account with these informations."
+          );
+        }
       }
-    }
-  };
-  xhr.open("POST", "/api/contact/register", true);
-  xhr.setRequestHeader("Content-type", "application/json");
-  xhr.send(
-    JSON.stringify({
-      salutation: inputSalutation.value,
-      firstname: inputFirstName.value,
-      lastname: inputLastName.value,
-      email: inputEmail.value,
-      password: inputPassword.value,
-    })
-  );
+    };
+    xhr.open("POST", "/api/sign/register", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(
+      JSON.stringify({
+        salutation: inputSalutation.value,
+        firstname: inputFirstName.value,
+        lastname: inputLastName.value,
+        email: inputEmail.value,
+        password: inputPassword.value,
+      })
+    );
+  }
 });
 
 // Update contacts details
@@ -173,12 +175,14 @@ updateButton.addEventListener("click", function (e) {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         var response = JSON.parse(xhr.response);
-
         document.getElementById("updateMessage").textContent = response.message;
       } else {
+        /*
         document.getElementById("updateMessage").textContent =
-          "Sorry, but we are able tu update your contact details.";
+          "Sorry, but your contact details are no updated";
         document.getElementById("updateMessage").style.color = "Red";
+        */
+        alert("Sorry, but your contact details are no updated.");
       }
     }
   };
@@ -206,9 +210,8 @@ updateButton.addEventListener("click", function (e) {
 function displayContactInformations(firstName) {
   welcomePage.style.display = "none";
   informationsPage.style.display = "block";
-
   document.getElementById("welcomePersonalSpace").textContent =
-    "Welcome " + firstName + " to your personal space";
+    "Welcome " + firstName + " to my personal space";
 }
 
 function displayContactDetails(contact) {
@@ -225,7 +228,6 @@ function displayContactDetails(contact) {
 
 function displayContractDetails(salesforceId) {
   var xhr = new XMLHttpRequest();
-
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 && xhr.responseText != "") {
@@ -242,7 +244,8 @@ function displayContractDetails(salesforceId) {
           "Contract Term (months): " + response.contractterm;
       } else {
         document.getElementById("contactContractNumber").innerHTML =
-          "We couldn't find a contract related to your account";
+          "We could" +
+          't find a contract related to your account.</br>Please <a href="mailto:sales@legarant.com"> contact your seller</a>';
       }
     }
   };

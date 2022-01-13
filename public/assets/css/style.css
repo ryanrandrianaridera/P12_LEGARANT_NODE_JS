@@ -7,12 +7,17 @@
 }
 
 body {
+  margin: 0;
   font-family: "Source Sans Pro", arial, sans-serif;
   background-color: #f5f5f5;
   text-align: center;
   color: black;
   font-size: 1.2em;
   width: auto;
+}
+
+.logo {
+  max-width: auto;
 }
 
 .blocFields {
@@ -39,7 +44,7 @@ body {
   border: 0.1125rem solid #1d9a8d;
   height: 35px;
   width: 140px;
-  max-width: 125px;
+  max-width: auto;
   color: #fff;
   background: #1d9a8d;
   text-align: center;
@@ -51,36 +56,25 @@ body {
   align-content: center;
   cursor: pointer;
   border-radius: 10rem;
+  transform: scale(1);
   transition: transform 300ms;
 }
-/*
-#loginButton,
-#registerButton,
-#updateButton {
-  background: #08b834;
-  border: none;
-  border-radius: 5px;
-  height: 35px;
-  width: 140px;
-  color: white;
-  text-align: center;
-  transform: scale(1);
-  transition: transform 400ms;
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .btn {
+    max-width: 130px;
+  }
 }
-
-#cancelButton,
-#deconnectButton {
-  background: #b82208;
-  border: none;
-  border-radius: 5px;
-  height: 35px;
-  width: 140px;
-  color: white;
-  text-align: center;
-  transform: scale(1);
-  transition: transform 400ms;
+@media screen and (min-width: 1200px) {
+  .btn {
+    max-width: 150px;
+  }
 }
-*/
+.btn:hover {
+  background: #ccfffa;
+  color: #1d9a8d;
+  box-shadow: 0 0 0.3em #1d9a8d;
+  transform: scale(1.05);
+}
 
 #createAccountLogin,
 #blocRegister,
@@ -90,7 +84,7 @@ body {
 }
 
 #footer {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 #blocDetails {
@@ -101,23 +95,23 @@ body {
 }
 
 #blocContactDetails {
-  width: 40%;
-  margin-left: 5px;
+  width: 35%;
+  margin-left: 10px;
   margin-right: 5px;
 }
 #blocContractDetails {
-  width: 30%;
+  width: 35%;
   margin-left: 5px;
   margin-right: 5px;
 }
 #blocProductDetails {
-  width: 30%;
+  width: 35%;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 .productItem {
-  background: rgb(141, 238, 138);
+  background: rgb(104, 180, 100);
   border: none;
   border-radius: 5px;
   color: rgb(10, 10, 10);
