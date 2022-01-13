@@ -15,12 +15,36 @@ router.get("/:id", (req, res) => {
   try {
     const { id } = req.params;
     client
-      .query("SELECT * FROM salesforce.Contact WHERE id = $1", [id])
-      .then((contact) => {
-        res.json(contact.rows[0]);
+      .query("SELECT * FROM salesforce.Contact WHERE sfid = $1", [id])
+      .then((response) => {
+        var contacts = response.rows[0];
+        res.status(200).json(contacts);
       });
   } catch (error) {
     console.error(error.message);
+  }
+});
+
+router.put("/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    var salutation = req.body.salutation;
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var password = req.body.password;
+
+    client
+      .query(
+        "UPDATE salesforce.Contact SET salutation = $1, firstname = $2, lastname = $3, email = $4, phone = $5  WHERE sfid = $6",
+        [salutation, firstname, lastname, email, phone, id]
+      )
+      .then((response) => {
+        res.status(200).json({ message: "Firstname has been updated!" });
+      });
+  } catch (err) {
+    console.error(err.message);
   }
 });
 
@@ -51,31 +75,19 @@ router.patch("/update", (req, res) => {
     });
 });
 
-router.patch("/update/:sfid", (req, res) => {
+router.delete("/:id", (req, res) => {
   try {
-    var sfid = req.params.sfid;
-    console.log("BEFORE QUERY SFID: " + sfid);
+    const { id } = req.params;
     client
       .query(
-        "UPDATE salesforce.Contact SET salutation = $2, firstname= $3, lastname= $4, email= $5, phone= $6, mailingstreet= $7, mailingcity= $8, mailingcountry= $9 WHERE sfid= $1 RETURNING firstname",
-        [
-          sfid,
-          req.body.salutation,
-          req.body.firstName,
-          req.body.lastname,
-          req.body.email,
-          req.body.phone,
-          req.body.mailingstreet,
-          req.body.mailingcity,
-          req.body.mailingcountry,
-        ]
+        "UPDATE salesforce.Contact SET active__c = false WHERE sfid = $1",
+        [id]
       )
-      .then((contact) => {
-        res.json(contact.rows[0]);
+      .then((response) => {
+        res.status(200).json({ message: "Contact has been deactivate!" });
       });
-  } catch (error) {
-    console.error(error.message);
+  } catch (err) {
+    console.error(err.message);
   }
 });
-
 module.exports = router;
