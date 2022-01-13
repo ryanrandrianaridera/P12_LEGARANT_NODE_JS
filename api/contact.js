@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
 
 router.patch("/update", (req, res) => {
   const query = {
-    text: "UPDATE salesforce.Contact SET salutation = $1, firstname= $2, lastname= $3, email= $4, phone= $5, mailingstreet= $6, mailingcity= $7, mailingcountry= $8 WHERE id= $9",
+    text: "UPDATE salesforce.Contact SET salutation = $1, firstname= $2, lastname= $3, email= $4, phone= $5, mailingstreet= $6, mailingcity= $7, mailingcountry= $8 WHERE sfid= $9",
     values: [
       req.body.salutation,
       req.body.firstname,
