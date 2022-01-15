@@ -25,8 +25,9 @@ router.post("/login", (req, res) => {
         const token = jwt.sign(contacts, SECRET_KEY, {
           expiresIn: 24 * 60 * 60,
         });
-        console.log(token);
-        res.status(200).json(contacts);
+        res.header("Authorization", "Bearer " + token);
+        // console.log(token);
+        return res.status(200).json(contacts);
       });
   } catch (error) {
     res.status(500);

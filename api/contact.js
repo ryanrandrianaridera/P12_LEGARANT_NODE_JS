@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   return res.status(200).json("NON LOGGED");
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", auth, (req, res) => {
   try {
     const { id } = req.params;
     client
@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", auth, (req, res) => {
   try {
     const { id } = req.params;
     var salutation = req.body.salutation;
@@ -75,7 +75,7 @@ router.patch("/update", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
   try {
     const { id } = req.params;
     client

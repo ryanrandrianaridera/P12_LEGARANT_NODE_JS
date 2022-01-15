@@ -74,9 +74,10 @@ loginButton.addEventListener("click", function (e) {
   } else {
     //Create our request
     var xhr = new XMLHttpRequest();
-
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
+        var headers = xhr.getAllResponseHeaders();
+        console.log(headers);
         if (xhr.status == 200 && xhr.responseText != "") {
           var response = JSON.parse(xhr.response);
           //console.log(response);
@@ -93,10 +94,8 @@ loginButton.addEventListener("click", function (e) {
           // display contact informations
           displayContactInformations(response.firstname);
         } else {
-          /*
           document.getElementById("errorMessage").innerHTML =
             "Sorry but we couldn't find your account, please verify email or password.";
-          */
           alert(
             "Sorry but we couldn't find your account, please verify email or password."
           );
@@ -143,7 +142,8 @@ registerButton.addEventListener("click", function (e) {
           );
           location.reload();
         } else {
-          //document.getElementById("errorMessage").innerHTML =
+          document.getElementById("errorMessage").innerHTML =
+            "Sorry but we couldn't find your account with these informations.";
           alert(
             "Sorry but we couldn't find your account with these informations."
           );
@@ -170,18 +170,16 @@ updateButton.addEventListener("click", function (e) {
 
   //Create our request
   var xhr = new XMLHttpRequest();
-
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         var response = JSON.parse(xhr.response);
         document.getElementById("updateMessage").textContent = response.message;
+        alert("Your informations are updated.");
       } else {
-        /*
         document.getElementById("updateMessage").textContent =
           "Sorry, but your contact details are no updated";
         document.getElementById("updateMessage").style.color = "Red";
-        */
         alert("Sorry, but your contact details are no updated.");
       }
     }
