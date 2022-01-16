@@ -10,8 +10,11 @@
         "density": "3.0"
       }
     ],
+    "orientation": "portrait",
     "start_url": "/",
+    "scope": "/",
+    "lang": "en",
     "display": "fullscreen",
-    "theme_color": "#1d9a8d",
-    "background_color": "#f5f5f5"
+    "theme_color": "#5f7995",
+    "background_color": "#5f7995"
   }

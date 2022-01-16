@@ -1,4 +1,4 @@
-const CACHE_NAME = "sw-cache-example";
+const CACHE_NAME = "legarantApp-cache-example";
 const toCache = ["/", "/index.html"];
 
 self.addEventListener("install", function (event) {
