@@ -1,10 +1,7 @@
 const express = require("express");
-//const bodyParser = require("body-parser");
-const path = require("path");
+//const path = require("path");
 const app = express();
-//Config client environnement
 const client = require("./config/database");
-require("dotenv").config();
 const signRoutes = require("./api/sign");
 const contactRoutes = require("./api/contact");
 const contractRoutes = require("./api/contract");
@@ -16,11 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Path www
+app.use(express.static("public"));
+/*
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
-
+*/
 //Allow Header Controls
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

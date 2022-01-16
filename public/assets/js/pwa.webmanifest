@@ -1,12 +1,13 @@
 {
     "name": "LEGARANT AXG MOBILE APP",
-    "short_name": "pwa-tutorial",
+    "short_name": "LEGARANT AXG APP",
     "description": "Progressive Web App",
     "icons": [
       {
         "src": "/assets/img/apple-icon-144x144.png",
         "sizes": "144x144",
-        "type": "image/png"
+        "type": "image/png",
+        "density": "3.0"
       }
     ],
     "start_url": "/",
