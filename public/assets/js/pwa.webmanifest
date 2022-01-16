@@ -1,0 +1,16 @@
+{
+    "name": "LEGARANT AXG MOBILE APP",
+    "short_name": "pwa-tutorial",
+    "description": "Progressive Web App",
+    "icons": [
+      {
+        "src": "../public/assets/img/favicon-32x32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "display": "fullscreen",
+    "theme_color": "#1d9a8d",
+    "background_color": "f5f5f5"
+  }

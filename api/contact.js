@@ -33,7 +33,7 @@ router.put("/:id", auth, (req, res) => {
     var lastname = req.body.lastname;
     var email = req.body.email;
     var phone = req.body.phone;
-    var password = req.body.password;
+    // var password = req.body.password;
 
     client
       .query(

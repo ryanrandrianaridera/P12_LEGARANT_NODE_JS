@@ -76,8 +76,8 @@ loginButton.addEventListener("click", function (e) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
-        var headers = xhr.getAllResponseHeaders();
-        console.log(headers);
+        // var headers = xhr.getAllResponseHeaders();
+        // console.log(headers);
         if (xhr.status == 200 && xhr.responseText != "") {
           var response = JSON.parse(xhr.response);
           //console.log(response);
@@ -167,7 +167,6 @@ registerButton.addEventListener("click", function (e) {
 // Update contacts details
 updateButton.addEventListener("click", function (e) {
   e.preventDefault();
-
   //Create our request
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -258,7 +257,6 @@ function displayContractDetails(salesforceId) {
 
 function displayLegarantProduct() {
   var xhr = new XMLHttpRequest();
-
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 && xhr.responseText != "") {

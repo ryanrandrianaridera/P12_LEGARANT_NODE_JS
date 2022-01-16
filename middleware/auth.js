@@ -34,21 +34,3 @@ module.exports = (req, res, next) => {
     return res.status(401).json("token_required");
   }
 };
-
-/*    
-    return res.status(401).json({ error: "Access-denied" });
-  }
-  //check validity
-  try {
-    const verified = jwt.verify(authHeader, process.env.SECRET_KEY);
-    //If verify ok
-    const user = jwt.decode(authHeader, process.env.SECRET_KEY);
-    req.user = user;
-    next();
-  } catch (e) {
-    res.status(401).json({
-      error: "Invalid-token",
-    });
-  }
-};
-*/
