@@ -41,7 +41,7 @@ router.put("/:id", auth, (req, res) => {
         [salutation, firstname, lastname, email, phone, id]
       )
       .then((response) => {
-        res.status(200).json({ message: "Firstname has been updated!" });
+        res.status(200).json({ message: "Contact has been updated!" });
       });
   } catch (err) {
     console.error(err.message);
