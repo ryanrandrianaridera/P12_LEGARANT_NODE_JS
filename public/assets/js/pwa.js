@@ -4,10 +4,10 @@ function init() {
     navigator.serviceWorker
       .register("./assets/js/service-worker.js")
       .then((reg) => {
-        console.log("Service worker registered! Scope : ", reg);
+        // console.log("Service worker registered! Scope : ", reg);
       })
       .catch((err) => {
-        console.error("Service worker not registered :", err);
+        //  console.error("Service worker not registered :", err);
       });
   } else {
     console.log("The browser does not support Service Worker");

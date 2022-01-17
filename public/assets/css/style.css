@@ -16,10 +16,6 @@ body {
   width: auto;
 }
 
-.logo {
-  max-width: auto;
-}
-
 .blocFields {
   text-align: left;
   margin: auto;
@@ -44,13 +40,11 @@ body {
   border: 0.1125rem solid #1d9a8d;
   height: 35px;
   width: 140px;
-  max-width: auto;
   color: #fff;
   background: #1d9a8d;
   text-align: center;
   font-size: 0.9rem;
   font-weight: bolder;
-  letter-spacing: auto;
   display: inline-block;
   vertical-align: top;
   align-content: center;
