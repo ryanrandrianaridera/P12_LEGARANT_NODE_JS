@@ -1,23 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/database");
-const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-require("dotenv").config();
-const SECRET_KEY = process.env.SECRET_KEY;
-
-// get /api/contract
-router.get("/", (req, res) => {
-  return res.status(200).json("NON LOGGED");
-});
 
 router.get("/:id", auth, (req, res) => {
   try {
     const { id } = req.params;
     client
       .query(
-        "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where sfid=$1",
-        [id]
+        "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where sfid=$1 and customersignedid=$2 order by startdate",
+        [id, req.decoded.sfid]
       )
       .then((response) => {
         var contracts = response.rows[0];
@@ -34,10 +26,10 @@ router.get("/:id", auth, (req, res) => {
   }
 });
 
-router.post("/getContract", (req, res) => {
+router.get("/", auth, (req, res) => {
   const query = {
-    text: "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1",
-    values: [req.body.sfid],
+    text: "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1 order by startdate",
+    values: [req.decoded.sfid],
   };
   client
     .query(query)

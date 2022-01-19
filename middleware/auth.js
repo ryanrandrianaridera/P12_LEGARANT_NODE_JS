@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
       } else {
         req.decoded = decoded;
 
-        const expiresIn = 24 * 60 * 60;
+        /*const expiresIn = 24 * 60 * 60;
         const newToken = jwt.sign(
           {
             user: decoded.user,
@@ -24,9 +24,9 @@ module.exports = (req, res, next) => {
           {
             expiresIn: expiresIn,
           }
-        );
+        );*/
 
-        res.header("Authorization", "Bearer " + newToken);
+        //  res.header("Authorization", "Bearer " + newToken);
         next();
       }
     });

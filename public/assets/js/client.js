@@ -118,6 +118,7 @@ loginButton.addEventListener("click", function (e) {
 // Deconnect Button
 deconnectButton.addEventListener("click", function (e) {
   e.preventDefault();
+  sessionStorage.clear();
   location.reload();
 });
 
@@ -144,7 +145,6 @@ registerButton.addEventListener("click", function (e) {
             "Your Account has been registered with success ! Please Log In";
           //alert("Your Account has been registered with success ! Please Log In");
           location.reload();
-          sessionStorage.clear();
         } else {
           document.getElementById("errorMessage").innerHTML =
             "Sorry but we couldn't find your account with these informations.";
@@ -187,6 +187,10 @@ updateButton.addEventListener("click", function (e) {
   };
   xhr.open("PATCH", "/api/contact/update", true);
   xhr.setRequestHeader("Content-type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Bearer " + sessionStorage.getItem("token")
+  );
   xhr.send(
     JSON.stringify({
       salutation: contactSalutation.value,
@@ -247,8 +251,12 @@ function displayContractDetails(salesforceId) {
       }
     }
   };
-  xhr.open("POST", "/api/contract/getContract", true);
+  xhr.open("GET", "/api/contract/", true);
   xhr.setRequestHeader("Content-type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Bearer " + sessionStorage.getItem("token")
+  );
   xhr.send(
     JSON.stringify({
       sfid: salesforceId,
@@ -271,6 +279,10 @@ function displayLegarantProduct() {
     }
   };
   xhr.open("POST", "/api/product/getProduct", true);
+  xhr.setRequestHeader(
+    "Authorization",
+    "Bearer " + sessionStorage.getItem("token")
+  );
   xhr.send();
 }
 

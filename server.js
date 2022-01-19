@@ -1,5 +1,4 @@
 const express = require("express");
-//const path = require("path");
 const app = express();
 const client = require("./config/database");
 const signRoutes = require("./api/sign");
@@ -14,12 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //Path www
 app.use(express.static("public"));
-/*
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-*/
+
 //Allow Header Controls
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

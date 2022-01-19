@@ -7,7 +7,7 @@ require("dotenv").config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
 // get /api/contract
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   return res.status(200).json("NON LOGGED");
 });
 
@@ -26,7 +26,7 @@ router.post("/login", (req, res) => {
           expiresIn: 24 * 60 * 60,
         });
         res.header("Authorization", "Bearer " + token);
-        // console.log(token);
+        //console.log(token);
         return res.status(200).json(contacts);
       });
   } catch (error) {

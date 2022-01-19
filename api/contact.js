@@ -1,14 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/database");
-const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-require("dotenv").config();
-const SECRET_KEY = process.env.SECRET_KEY;
+//require("dotenv").config();
 
-// get /api/contract
-router.get("/", (req, res) => {
-  return res.status(200).json("NON LOGGED");
+// get /api/contact
+router.get("/", auth, (req, res) => {
+  const query = {
+    text: "SELECT Salutation, FirstName, LastName, Email, Password__c from salesforce.Contact where sfid=$1",
+    values: [req.decoded.sfid],
+  };
+  client
+    .query(query)
+    .then((response) => {
+      res.status(200).json(response.rows[0]);
+      //console.log(response.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+      console.log({ message: err });
+    });
 });
 
 router.get("/:id", auth, (req, res) => {
@@ -48,7 +59,7 @@ router.put("/:id", auth, (req, res) => {
   }
 });
 
-router.patch("/update", (req, res) => {
+router.patch("/update", auth, (req, res) => {
   const query = {
     text: "UPDATE salesforce.Contact SET salutation = $1, firstname= $2, lastname= $3, email= $4, phone= $5, mailingstreet= $6, mailingcity= $7, mailingcountry= $8 WHERE sfid= $9",
     values: [
@@ -60,7 +71,7 @@ router.patch("/update", (req, res) => {
       req.body.mailingstreet,
       req.body.mailingcity,
       req.body.mailingcountry,
-      req.body.sfid,
+      req.decoded.sfid,
     ],
   };
   client
