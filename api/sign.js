@@ -26,7 +26,7 @@ router.post("/login", (req, res) => {
           expiresIn: 24 * 60 * 60,
         });
         res.header("Authorization", "Bearer " + token);
-        console.log(token);
+        //console.log(token);
         return res.status(200).json(contacts);
       });
   } catch (error) {
