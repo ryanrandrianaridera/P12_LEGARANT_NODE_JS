@@ -1,3 +1,4 @@
+// db Config
 const { Client } = require("pg");
 require("dotenv").config();
 
