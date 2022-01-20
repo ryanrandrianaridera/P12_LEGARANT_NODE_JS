@@ -6,7 +6,7 @@ const client = require("../config/database");
 
 // get /api/contract
 router.get("/", auth, (req, res) => {
-  return res.status(200).json("NON LOGGED");
+  return res.status(200).json("LOGGED");
 });
 
 router.post("/getProduct", auth, (req, res) => {

@@ -3,6 +3,23 @@ const router = express.Router();
 const client = require("../config/database");
 const auth = require("../middleware/auth");
 
+router.get("/", auth, (req, res) => {
+  const query = {
+    text: "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1 order by startdate",
+    values: [req.decoded.sfid],
+  };
+  client
+    .query(query)
+    .then((response) => {
+      res.status(200).json(response.rows[0]);
+      //console.log(response.rows);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+      console.log({ message: err });
+    });
+});
+
 router.get("/:id", auth, (req, res) => {
   try {
     const { id } = req.params;
@@ -24,23 +41,6 @@ router.get("/:id", auth, (req, res) => {
   } catch (error) {
     console.error(error.message);
   }
-});
-
-router.get("/", auth, (req, res) => {
-  const query = {
-    text: "SELECT contractnumber, startdate, enddate, contractterm from salesforce.Contract where customersignedid=$1 order by startdate",
-    values: [req.decoded.sfid],
-  };
-  client
-    .query(query)
-    .then((response) => {
-      res.status(200).json(response.rows[0]);
-      //console.log(response.rows);
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-      console.log({ message: err });
-    });
 });
 
 module.exports = router;
